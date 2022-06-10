@@ -1,2 +1,2 @@
 # SudokuSolver
-I created this Sudoku Solver, while learning math and programming concepts like matrices and recursion. I coded this in Python, it’s my first project
+I created this Sudoku Solver (my first project), while learning math and programming concepts, like matrices and recursion. I made it in Python.
