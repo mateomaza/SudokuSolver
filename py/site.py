@@ -1,28 +1,7 @@
 #Final Project: Using all the things we have learnt, create a function that solves any Sudoku
-
 import numpy as np
 
-unsolved_hrd = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 3, 6, 0, 0, 0, 0, 0],
-                [0, 7, 0, 0, 9, 0, 2, 0, 0],
-                [0, 5, 0, 0, 0, 7, 0, 0, 0],
-                [0, 0, 0, 0, 4, 5, 7, 0, 0],
-                [0, 0, 0, 1, 0, 0, 0, 3, 0],
-                [0, 0, 1, 0, 0, 0, 0, 6, 8],
-                [0, 0, 8, 5, 0, 0, 0, 1, 0],
-                [0, 9, 0, 0, 0, 0, 4, 0, 0]]
-
-unsolved_izi = [[0, 0, 0, 2, 6, 0, 7, 0, 1],
-                [6, 8, 0, 0, 7, 0, 0, 9, 0],
-                [1, 9, 0, 0, 0, 4, 5, 0, 0],
-                [8, 2, 0, 1, 0, 0, 0, 4, 0],
-                [0, 0, 4, 6, 0, 2, 9, 0, 0],
-                [0, 5, 0, 0, 0, 3, 0, 2, 8],
-                [0, 0, 9, 3, 0, 0, 0, 7, 4],
-                [0, 4, 0, 0, 5, 0, 0, 3, 6],
-                [7, 0, 3, 0, 1, 8, 0, 0, 0]]
-
-unsolved_bgn = [[1, 0, 0, 9, 0, 4, 0, 8, 2],
+unsolved_sdk = [[1, 0, 0, 9, 0, 4, 0, 8, 2],
                 [0, 5, 2, 6, 8, 0, 3, 0, 0],
                 [8, 6, 4, 2, 0, 0, 9, 1, 0],
                 [0, 1, 0, 0, 4, 9, 8, 0, 6],
@@ -33,22 +12,8 @@ unsolved_bgn = [[1, 0, 0, 9, 0, 4, 0, 8, 2],
                 [0, 3, 0, 4, 9, 7, 0, 0, 8]]
 
 
-s_s = [[8, 2, 7, 1, 5, 4, 3, 9, 6],
-       [9, 6, 5, 3, 2, 7, 1, 4, 8],
-       [3, 4, 1, 6, 8, 9, 7, 5, 2],
-       [5, 9, 3, 4, 6, 8, 2, 7, 1],
-       [4, 7, 2, 5, 1, 3, 6, 8, 9],
-       [6, 1, 8, 9, 7, 2, 4, 3, 5],
-       [7, 8, 6, 2, 3, 5, 9, 1, 4],
-       [1, 5, 4, 7, 9, 6, 8, 2, 3],
-       [2, 3, 9, 8, 4, 1, 5, 6, 7]]
-
-
-
 def sudoku_solver(sudoku, sol):
-    # Sudoku is solved (no 0s & correct order):
-
-    import numpy as np
+    # Sudoku is solved (no 0s & correct order) ↓
     check = np.all(sudoku)
     if check:
         sol += sudoku
@@ -63,7 +28,6 @@ def sudoku_solver(sudoku, sol):
     print("")
 
     # Number repeats in row:
-
     filtered_rows = []
     i = 0
     while i < 9:
@@ -76,7 +40,6 @@ def sudoku_solver(sudoku, sol):
 
 
     # Number repeats in column:
-
     each_col = [list(i) for i in zip(*sudoku)]
     filtered_cols = []
     i = 0
@@ -90,7 +53,6 @@ def sudoku_solver(sudoku, sol):
 
 
     # Number repeats in box:
-
     i = 0
     all_box = []
     while i < 7:
@@ -117,7 +79,7 @@ def sudoku_solver(sudoku, sol):
 
 
     # Recursive Cases:
-    """How I solved it :)
+    """How I first solved it :)
     i = 0
     while i < 9:
         y = 0
@@ -165,7 +127,6 @@ def sudoku_solver(sudoku, sol):
         i += 1"""
 
     # Cleaner code, using a for loop in range(1, 10) to iterate through 1 to 9
-    
     for i in range(9):
         for y in range(9):
             if sudoku[i][y] == 0:
@@ -177,10 +138,8 @@ def sudoku_solver(sudoku, sol):
                     sudoku[i][y] = 0
                 return
 
-
-
     # No solution:
     return "No Solution"
 
 
-print(sudoku_solver(unsolved_bgn, []))
+print(sudoku_solver(unsolved_sdk, []))
