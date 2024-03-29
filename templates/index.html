@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sudoku Solver</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket;
+        function initialSolve() {
+            socket.emit('start_solving', {message: 'Start solving the Sudoku puzzle'});
+            solveButton.disabled = true;
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+            var solveButton = document.getElementById('solveButton');
+            solveButton.addEventListener('click', initialSolve);
+
+            socket.on('connect', function() {
+              solveButton.disabled = false;
+            });
+
+            socket.on('sudoku_step', function(data) {
+              document.getElementById("unsolved-sudoku").innerHTML = data.data;
+            });
+
+            socket.on('sudoku_finished', function(data) {
+              document.getElementById("sudoku").innerHTML = data.data;
+              document.getElementById("unsolved-sudoku").style.display = "none";
+              createReloadButton();
+            });
+        });
+
+      function createReloadButton() {
+          var solveButton = document.getElementById('solveButton');
+          solveButton.innerText = 'Solve Again';
+          solveButton.disabled = false;
+          solveButton.removeEventListener('click', initialSolve);
+          solveButton.addEventListener('click', function reloadPage() {
+            location.reload();
+        });
+      }
+    </script>
+</head>
+<body>
+    <h1>Sudoku Solver</h1>
+    <h4>Unsolved Sudoku (interpret 0s as blank spaces)</h4>
+    <pre id="unsolved-sudoku">{{ unsolved }}</pre>
+    <button id="solveButton"">Start Solving</button>
+    <pre id="sudoku">Solution will appear here...</pre>
+</body>
+</html>
